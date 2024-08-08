@@ -116,7 +116,7 @@ uint16_t Timers_Read(uint16_t addr) {
   case 0x3d17: return this.timers[TIMERS_B].ctrl;
   case 0x3d18: return this.timers[TIMERS_B].enable;
   case 0x3d1c: return PPU_GetCurrLine();
-  default: VSmile_Warning("unknown read from Timers address %04x\n", addr);
+  default: VSmile_Warning("Unknown read from Timers address %04x\n", addr);
   }
 
   return 0x0000;
@@ -130,14 +130,14 @@ void Timers_Write(uint16_t addr, uint16_t data) {
     return;
 
   case 0x3d11:
-    // printf("timebase clear\n");
+    // printf("Timebase clear\n");
     this.timer2khz = 0;
     this.timer1khz = 0;
     this.timer4hz  = 0;
     return;
 
   case 0x3d12:
-    // printf("timer A Data set to %04x at %06x\n", data, CPU_GetCSPC());
+    // printf("Timer A Data set to %04x at %06x\n", data, CPU_GetCSPC());
     this.timers[TIMERS_A].data = data;
     this.timerASetup = data;
     return;
@@ -156,20 +156,20 @@ void Timers_Write(uint16_t addr, uint16_t data) {
     return;
 
   case 0x3d16:
-    // printf("timer B data set to %04x at %06x\n", data, CPU_GetCSPC());
+    // printf("Timer B data set to %04x at %06x\n", data, CPU_GetCSPC());
     this.timers[TIMERS_B].data = data;
     this.timerBSetup = data;
     return;
 
   case 0x3d17:
-    // printf("timer B CTRL set to %04x at %06x\n", data, CPU_GetCSPC());
+    // printf("Timer B CTRL set to %04x at %06x\n", data, CPU_GetCSPC());
     this.timers[TIMERS_B].ctrl = data;
     if (data == 1)
       Timers_UpdateTimerB();
     return;
 
   case 0x3d18:
-    // printf("timer B enable set to %04x at %06x\n", data, CPU_GetCSPC());
+    // printf("Timer B enable set to %04x at %06x\n", data, CPU_GetCSPC());
     this.timers[TIMERS_B].enable = data & 1;
     if (data & 1) {
       Timers_UpdateTimerB();
@@ -184,13 +184,13 @@ void Timers_Write(uint16_t addr, uint16_t data) {
     return;
 
   default:
-    VSmile_Warning("unknown read from Timers address %04x\n", addr);
+    VSmile_Warning("Unknown read from Timers address %04x\n", addr);
   }
 }
 
 
 void Timers_SetTimebase(uint16_t data) {
-  // printf("timebase set to %04x\n", data);
+  // printf("Timebase set to %04x\n", data);
 
   if ((this.timebaseSetup & 0x3) != (data & 0x3)) {
     uint16_t hz = 8 << (data & 0x3);
@@ -203,7 +203,7 @@ void Timers_SetTimebase(uint16_t data) {
     uint16_t hz = 128 << ((data & 0xc) >> 2);
     Timer_Adjust(this.tmb[1], SYSCLOCK / hz);
     Timer_Reset(this.tmb[1]);
-    // printf("[BUS] TMB2 freqency set to %d Hz", hz);
+    // printf("[BUS] TMB2 frequency set to %d Hz", hz);
   }
 
   this.timebaseSetup = data;
@@ -211,7 +211,7 @@ void Timers_SetTimebase(uint16_t data) {
 
 
 void Timers_SetTimerACTRL(uint16_t data) {
-  // printf("timer A CTRL set to %04x at %06x\n", data, CPU_GetCSPC());
+  // printf("Timer A CTRL set to %04x at %06x\n", data, CPU_GetCSPC());
   uint32_t timerARate = 0;
   switch (data & 7) {
   case 2:
@@ -257,7 +257,7 @@ void Timers_UpdateTimerB() {
   }
 
   Timer_Reset(this.timerCSource);
-  // printf("update timer B\n");
+  // printf("Update Timer B\n");
 }
 
 
@@ -298,7 +298,7 @@ void Timers_TickTMB(uint32_t index) {
 
 
 void Timers_TickAB() {
-  // printf("timer AB Tick\n");
+  // printf("Timer AB Tick\n");
   if (this.timerBRate) {
     this.timerBDiv++;
     if (this.timerBDiv >= this.timerBRate) {
@@ -312,7 +312,7 @@ void Timers_TickAB() {
 
 
 void Timers_TickA() {
-  // printf("timer A Tick\n");
+  // printf("Timer A Tick\n");
   this.timers[TIMERS_A].data++; // Timer A Data
   if (!this.timers[TIMERS_A].data) {
       this.timers[TIMERS_A].data = this.timerASetup;
@@ -322,7 +322,7 @@ void Timers_TickA() {
 
 
 void Timers_TickC() {
-  // printf("timer C Tick\n");
+  // printf("Timer C Tick\n");
   this.timers[TIMERS_B].data++; // Timer B Data
   if (!this.timers[TIMERS_B].data) {
     this.timers[TIMERS_B].data = this.timerBSetup;
