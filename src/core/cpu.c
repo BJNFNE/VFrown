@@ -443,7 +443,7 @@ void CPU_OpSPC() {
 // Perform unsigned multiply on two operands and store result in r3 and r4
 void CPU_OpMULU() {
   if (this.ins.opN == 1 && this.ins.opA == 7)
-    VSmile_Error("invalid multiplication at 0x%06x (opN = %01x, opA = %01x)", CPU_GetCSPC(), this.ins.opN, this.ins.opA);
+    VSmile_Error("Invalid multiplication at 0x%06x (opN = %01x, opA = %01x)", CPU_GetCSPC(), this.ins.opN, this.ins.opA);
 
   uint16_t a = this.r[this.ins.opA];
   uint16_t b = this.r[this.ins.opB];
@@ -463,7 +463,7 @@ void CPU_OpMULU() {
 // Perform signed multiply on two operands and store result in r3 and r4
 void CPU_OpMULS() {
   if (this.ins.opN == 1 && this.ins.opA == 7)
-    VSmile_Error("invalid multiplication at 0x%06x (opN = %01x, opA = %01x)", CPU_GetCSPC(), this.ins.opN, this.ins.opA);
+    VSmile_Error("Invalid multiplication at 0x%06x (opN = %01x, opA = %01x)", CPU_GetCSPC(), this.ins.opN, this.ins.opA);
 
   uint16_t a = this.r[this.ins.opA];
   int16_t b = this.r[this.ins.opB];
@@ -485,7 +485,7 @@ void CPU_OpMULS() {
 // Push PC and SR to the stack and perform a long jump to a specified location
 void CPU_OpCALL() {
   if ((this.ins.opA & 1) != 0)
-    VSmile_Error("illegal opcode 0x%04x at 0x%06x", this.ins.raw, CPU_GetCSPC());
+    VSmile_Error("Illegal opcode 0x%04x at 0x%06x", this.ins.raw, CPU_GetCSPC());
 
   uint16_t lowerPC = CPU_FetchNext();
   CPU_Push(this.pc, 0);
@@ -499,7 +499,7 @@ void CPU_OpCALL() {
 // Perform a long jump to a specified location
 void CPU_OpJMPF() {
   if (this.ins.opA != 7)
-    VSmile_Error("illegal opcode 0x%04x at 0x%06x", this.ins.raw, CPU_GetCSPC());
+    VSmile_Error("Illegal opcode 0x%04x at 0x%06x", this.ins.raw, CPU_GetCSPC());
 
   CPU_SetCSPC((this.ins.imm << 16) | CPU_FetchNext());
 
@@ -552,7 +552,7 @@ void CPU_OpMISC() {
   case 0x25: // NOP
     break;
 
-  default: VSmile_Error("unimplemented special instruction at 0x%06x (op1 = 0x%01x, offset = 0x%02x)", CPU_GetCSPC(), this.ins.op1, this.ins.imm);
+  default: VSmile_Error("Unimplemented special instruction at 0x%06x (op1 = 0x%01x, offset = 0x%02x)", CPU_GetCSPC(), this.ins.op1, this.ins.imm);
   }
 
   this.cycles += 2;
@@ -750,7 +750,7 @@ void CPU_OpPSH() {
 
 
 void CPU_OpBAD() {
-  VSmile_Error("unknown CPU instruction %04x at %06x", this.ins.raw, this.pc);
+  VSmile_Error("Unknown CPU instruction %04x at %06x", this.ins.raw, this.pc);
 }
 
 
@@ -777,7 +777,7 @@ void CPU_AddrImm6() {
 
 // Invalid addressing mode
 void CPU_AddrUnknown() {
-  VSmile_Error("unimplemented operand mode at 0x%06x (op1 = 0x%01x)", CPU_GetCSPC(), this.ins.op1);
+  VSmile_Error("Unimplemented operand mode at 0x%06x (op1 = 0x%01x)", CPU_GetCSPC(), this.ins.op1);
 }
 
 
