@@ -255,7 +255,7 @@ void Misc_WriteADCCtrl(uint16_t data) {
       Timer_Adjust(this.adcTimers[i], 0);
       Timer_Reset(this.adcTimers[i]);
     }
-    // printf("conversion timers disabled\n");
+    // printf("Conversion timers disabled\n");
   }
 }
 
