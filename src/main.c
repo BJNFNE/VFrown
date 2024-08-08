@@ -83,7 +83,7 @@ static void eventFunc(sapp_event* event) {
   Backend_HandleInput(event->key_code, event->type);
   Input_KeyboardMouseEvent(event);
 
-  // TODO: move this to the backend
+  // TODO: Move this to the backend
   if (event->type == SAPP_EVENTTYPE_FILES_DROPPED) {
     const int32_t numFiles = sapp_get_num_dropped_files();
 
