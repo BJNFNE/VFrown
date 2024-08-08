@@ -10,7 +10,7 @@ $(wildcard src/backend/lib/*.c)\
 $(wildcard src/core/*.c)\
 $(wildcard src/core/hw/*.c)\
 
-# platform
+# Platform
 ifndef platform
 	platform=linux
 endif
@@ -34,7 +34,7 @@ else ifeq ($(platform), web)
 endif
 
 
-# build type
+# Build type
 ifndef build
 	build=debug
 endif
@@ -65,3 +65,7 @@ VFrown: $(obj)
 
 clean:
 	rm -f $(obj)
+
+recompile:
+	make clean
+	make 
