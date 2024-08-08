@@ -120,7 +120,7 @@ typedef struct PPU_t {
     Sprite_t sprites[0x100];
   };
 
-  uint32_t pixelBuffer[320*240]; // Pixel buffer for screen
+  uint32_t pixelBuffer[320*240]; // Pixel buffer for Screen
 } PPU_t;
 
 bool PPU_Init();
