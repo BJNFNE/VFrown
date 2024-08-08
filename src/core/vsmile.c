@@ -133,7 +133,7 @@ void VSmile_Step() {
 
 void VSmile_Log(const char* message, ...) {
   if(message == NULL) {
-    printf("[LOG] unknown log with NULL pointer thrown\n");
+    printf("[LOG] Unknown log with NULL pointer thrown\n");
     return;
   }
 
