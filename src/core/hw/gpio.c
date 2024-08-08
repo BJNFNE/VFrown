@@ -138,10 +138,10 @@ uint16_t GPIO_GetIOB(uint16_t mask) {
 
 // Send data to IO port B
 void GPIO_SetIOB(uint16_t data, uint16_t mask) {
-  // printf("write to IOB (data: %04x, mask: %04x)\n", data, mask);
+  // printf("Write to IOB (data: %04x, mask: %04x)\n", data, mask);
   if (mask & 7) {
     Bus_SetChipSelectMode((data & 7));
-    // printf("chip select set to %d\n", (data & 7));
+    // printf("Chip select set to %d\n", (data & 7));
   }
 }
 
@@ -151,7 +151,7 @@ uint16_t GPIO_GetIOC(uint16_t mask) {
   uint16_t data = this.region;
   data |= Controller_GetRequests();
 
-  // printf("read from IOC (%04x) at %06x\n", data, CPU_GetCSPC());
+  // printf("Read from IOC (%04x) at %06x\n", data, CPU_GetCSPC());
 
   return data;
 }
@@ -159,7 +159,7 @@ uint16_t GPIO_GetIOC(uint16_t mask) {
 
 // Send data to IO port C
 void GPIO_SetIOC(uint16_t data, uint16_t mask) {
-  // printf("write to IOC with %04x at %06x\n", data, CPU_GetCSPC());
+  // printf("Write to IOC with %04x at %06x\n", data, CPU_GetCSPC());
 
   if ((mask >> 8) & 1) {
     Controller_SetSelect(0, (data >> 8) & 1);
