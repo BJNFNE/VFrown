@@ -11,6 +11,7 @@ bool DMA_Init() {
 
 void DMA_Cleanup() {
 
+  return true;
 }
 
 
