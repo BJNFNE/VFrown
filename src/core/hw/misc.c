@@ -145,7 +145,7 @@ void Misc_SetIRQFlags(uint16_t addr, uint16_t data) {
   } else if (addr == 0x2863) {
     PPU_SetIRQFlags(data);
   } else {
-    VSmile_Warning("unknown IRQ Acknowledge for %04x with data %04x", addr, data);
+    VSmile_Warning("Unknown IRQ Acknowledge for %04x with data %04x", addr, data);
   }
 
   // switch (address) {
@@ -156,7 +156,7 @@ void Misc_SetIRQFlags(uint16_t addr, uint16_t data) {
   //   this.io[0x22] |= data;
   //   break;
   // default:
-  //   VSmile_Warning("unknown IRQ Acknowledge for %04x with data %04x", address, data);
+  //   VSmile_Warning("Unknown IRQ Acknowledge for %04x with data %04x", address, data);
   // }
   //
   // CPU_ActivatePendingIRQs(); // Notify CPU that there might be IRQ's to handle
@@ -226,7 +226,7 @@ void Misc_WriteADCCtrl(uint16_t data) {
   if (data & prevADC & 0x2000) {
     this.adcCtrl &= ~0x2000;
     Bus_Store(0x3d22, 0x2000); // Reset interrupt in IRQ
-    // printf("resetting interrupt status...\n");
+    // printf("Resetting interrupt status...\n");
   }
 
   if (this.adcCtrl & 1) { // ADE
@@ -241,7 +241,7 @@ void Misc_WriteADCCtrl(uint16_t data) {
       uint32_t ticks = 16 << ((data >> 2) & 3);
       Timer_Adjust(this.adcTimers[channel], ticks);
       Timer_Reset(this.adcTimers[channel]);
-      // printf("conversion requested\n");
+      // printf("Conversion requested\n");
     }
 
     if (data & 0x0400) { // 8KHz Auto Request
