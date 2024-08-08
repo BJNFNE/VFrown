@@ -100,7 +100,7 @@ uint8_t Controller_SendByte() {
 
 
 void Controller_RecieveByte(uint8_t data) {
-  // printf("ctrl recieving %02x\n", data);
+  // printf("CTRL receiving %02x\n", data);
   if (controllers[0].select) {
     controllers[0].rxBuffer = data;
     Timer_Reset(controllers[0].rxTimer);
@@ -116,7 +116,7 @@ void Controller_RecieveByte(uint8_t data) {
 bool Controller_PushTx(uint8_t ctrlNum, uint8_t data) {
   Controller_t* this = &controllers[ctrlNum];
 
-  // printf("controller push %02x\n", data);
+  // printf("Controller push %02x\n", data);
 
   if (!this->txEmpty && (this->txHead == this->txTail)) {
     VSmile_Warning("Tx byte %02x discarded because FIFO is full", data);
@@ -135,7 +135,7 @@ uint8_t Controller_PopTx(uint8_t ctrlNum) {
   Controller_t* this = &controllers[ctrlNum];
 
   if (this->txEmpty) {
-    VSmile_Warning("returning 0x00 because Tx FIFO is empty");
+    VSmile_Warning("Returning 0x00 because Tx FIFO is empty");
     return 0x00;
   }
 
@@ -143,7 +143,7 @@ uint8_t Controller_PopTx(uint8_t ctrlNum) {
   this->txTail = (this->txTail + 1) & 0xf;
   this->txEmpty = (this->txHead == this->txTail);
 
-  // printf("controller pop %02x\n", data);
+  // printf("Controller pop %02x\n", data);
 
   return data;
 }
