@@ -118,7 +118,7 @@ sapp_desc sokol_main(int argc, char* argv[]) {
     .event_cb = (void(*)(const sapp_event*))eventFunc,
     .width = 640,
     .height = 480,
-    .window_title = "V.Frown",
+    .window_title = "V.Frown v1.0",
     .enable_dragndrop = true,
     .max_dropped_files = 2,
     .sample_count = 1,
