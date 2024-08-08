@@ -38,7 +38,7 @@ uint16_t DMA_Read(uint16_t addr) {
   case 0x3e02: return this.size;
   case 0x3e03: return this.dst;
   default:
-    VSmile_Warning("unknown read from DMA address %04x at %06x", addr, CPU_GetCSPC());
+    VSmile_Warning("Unknown read from DMA address %04x at %06x", addr, CPU_GetCSPC());
   }
 
   return 0x0000;
@@ -61,6 +61,6 @@ void DMA_Write(uint16_t addr, uint16_t data) {
   } return;
 
   default:
-    VSmile_Warning("unknown read from DMA address %04x at %06x", addr, CPU_GetCSPC());
+    VSmile_Warning("Unknown read from DMA address %04x at %06x", addr, CPU_GetCSPC());
   }
 }
