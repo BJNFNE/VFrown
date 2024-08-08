@@ -59,7 +59,7 @@ void Bus_Reset() {
 void Bus_LoadROM(const char* filePath) {
   FILE* file = fopen(filePath, "rb");
   if (!file) {
-    VSmile_Error("unable to load ROM - can't open \"%s\"", filePath);
+    VSmile_Error("Unable to load ROM - can't open \"%s\"", filePath);
     return;
   }
 
@@ -69,7 +69,7 @@ void Bus_LoadROM(const char* filePath) {
   fseek(file, 0, SEEK_SET);
 
   if (this.romSize > BUS_SIZE*sizeof(uint16_t)) {
-    VSmile_Error("file too large!");
+    VSmile_Error("File is too large!");
     this.romSize = BUS_SIZE*sizeof(uint16_t);
   }
   if (this.romBuffer)
@@ -85,7 +85,7 @@ void Bus_LoadROM(const char* filePath) {
 void Bus_LoadSysRom(const char* filePath) {
   FILE* file = fopen(filePath, "rb");
   if (!file) {
-    VSmile_Warning("unable to load system rom - can't open \"%s\"", filePath);
+    VSmile_Warning("Unable to load system rom - can't open \"%s\"", filePath);
     return;
   }
 
@@ -121,7 +121,7 @@ uint16_t Bus_Load(uint32_t addr) {
     return SPU_Read(addr);
   }
   else if (addr < 0x3d00) {
-    VSmile_Warning("read from internal memory location %04x", addr);
+    VSmile_Warning("Read from internal memory location %04x", addr);
     return 0x0000;
   }
   else if (addr < IO_START+IO_SIZE+DMA_SIZE) {
@@ -143,10 +143,10 @@ uint16_t Bus_Load(uint32_t addr) {
       return DMA_Read(addr);
     }
 
-    VSmile_Warning("unknown read from IO port %04x at %06x\n", addr, CPU_GetCSPC());
+    VSmile_Warning("Unknown read from IO port %04x at %06x\n", addr, CPU_GetCSPC());
     return 0x0000;
   } else if (addr < 0x4000) {
-    VSmile_Warning("read from internal memory location %04x", addr);
+    VSmile_Warning("Read from internal memory location %04x", addr);
     return 0x0000;
   }
 
@@ -180,7 +180,7 @@ void Bus_Store(uint32_t addr, uint16_t data) {
     return;
   }
   else if (addr < 0x3d00) {
-    VSmile_Warning("write to internal memory location %04x with %04x", addr, data);
+    VSmile_Warning("Write to internal memory location %04x with %04x", addr, data);
     return;
   }
   else if (addr < IO_START+IO_SIZE+DMA_SIZE) {
@@ -207,11 +207,11 @@ void Bus_Store(uint32_t addr, uint16_t data) {
       return;
     }
 
-    VSmile_Warning("write to unknown IO port %04x with %04x at %06x", addr, data, CPU_GetCSPC());
+    VSmile_Warning("Write to unknown IO port %04x with %04x at %06x", addr, data, CPU_GetCSPC());
     return;
   }
   else if (addr < 0x4000) {
-    VSmile_Warning("write to internal memory location %04x with %04x", addr, data);
+    VSmile_Warning("Write to internal memory location %04x with %04x", addr, data);
     return;
   }
 
